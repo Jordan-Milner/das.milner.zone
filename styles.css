@@ -604,6 +604,43 @@ main {
   padding: 4px 16px;
 }
 
+/* ---- In-thread trilogy navigator ---- */
+.series-card {
+  margin: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.series-head {
+  padding: 12px 16px;
+  font-weight: 800;
+  font-size: 15px;
+  border-bottom: 1px solid var(--border);
+}
+.series-item {
+  display: block;
+  padding: 12px 16px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border-faint);
+  transition: background 0.2s;
+}
+.series-item:last-child { border-bottom: none; }
+a.series-item:hover { background: var(--bg-hover); text-decoration: none; }
+.series-item .v { font-weight: 700; font-size: 15px; }
+.series-item .s { display: block; color: var(--text-secondary); font-size: 13px; margin-top: 2px; }
+.series-item.current { background: rgba(29, 155, 240, 0.06); cursor: default; }
+.series-item.current .v::after {
+  content: "You're here";
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue-text);
+  border: 1px solid var(--blue);
+  border-radius: 9999px;
+  padding: 1px 8px;
+  vertical-align: middle;
+}
+
 /* ===========================================================================
    Right sidebar
    =========================================================================== */

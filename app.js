@@ -457,6 +457,11 @@ Read all three. Then act. — F.E. 🕯️`,
   /* =========================================================================
      PROFILE + FEED
      ========================================================================= */
+  // the trilogy, in order — for the in-thread navigator
+  const SERIES = ["kapital-1", "kapital-2", "kapital-3"].map((id) => ({
+    id, vol: THREADS[id].vol, subtitle: THREADS[id].subtitle,
+  }));
+
   const PROFILE = Object.assign({}, MARX, {
     banner: "assets/banner.jpg",
     bio: `Materialist. Critic of political economy. Author of DAS KAPITAL (I–III).\n"I have only one passion — the relentless critique of everything that exists." Workers of all lands, unite.`,
@@ -683,6 +688,19 @@ Print it on the factory gates.`,
       </div>`;
   }
 
+  function seriesCard(currentId) {
+    return `
+      <div class="series-card">
+        <div class="series-head">📖 Das Kapital — the trilogy</div>
+        ${SERIES.map((s) => {
+          const inner = `<span class="v">${esc(s.vol)}</span><span class="s">${esc(s.subtitle)}</span>`;
+          return s.id === currentId
+            ? `<div class="series-item current">${inner}</div>`
+            : `<a class="series-item" href="#/status/${s.id}">${inner}</a>`;
+        }).join("")}
+      </div>`;
+  }
+
   function decay(base, i, factor) {
     const wobble = 0.9 + ((i * 7919) % 100) / 500;
     return Math.max(40, Math.round(base * Math.pow(factor, i) * wobble));
@@ -703,6 +721,7 @@ Print it on the factory gates.`,
       };
       html += threadTweet(t.tweets[i], stats, i < total - 1, i, total, t.date);
     }
+    html += seriesCard(id);
     html += composer();
     html += t.replies.map(replyTweet).join("");
     setView(html);
